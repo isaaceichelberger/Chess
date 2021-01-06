@@ -5,8 +5,8 @@ import Game.Type;
 
 public abstract class Piece {
 
-    public int x, y;
-    public Player player;
+    private int x, y;
+    private Player player;
 
     /**
      * Constructor for a Piece.
@@ -19,7 +19,10 @@ public abstract class Piece {
         this.x = x;
         this.y = y;
         this.player = player;
-        // todo board
+        // add piece to board array
+        Piece[][] boardArray = player.getGame().getGameBoard().getBoardArray();
+        boardArray[x][y] = this;
+        player.getGame().getGameBoard().setBoardArray(boardArray);
     }
 
     /**
@@ -45,4 +48,28 @@ public abstract class Piece {
      * @return  an integer indicating the Piece type (as defined above)
      */
     public abstract Type getType();
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

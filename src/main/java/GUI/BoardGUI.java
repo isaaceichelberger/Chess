@@ -7,10 +7,10 @@ import java.awt.*;
 
 public class BoardGUI {
 
-    Game game;
-    boolean endTurn = false;
+    private Game game;
+    private boolean endTurn = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Chess inst = new Chess();
         inst.gameLoop();
     }
@@ -50,4 +50,19 @@ public class BoardGUI {
         });
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public boolean isEndTurn() {
+        return endTurn;
+    }
+
+    public void setEndTurn(boolean endTurn) {
+        this.endTurn = endTurn;
+    }
 }

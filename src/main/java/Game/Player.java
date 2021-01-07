@@ -9,10 +9,12 @@ public class Player {
 
     private Color color;
     private Game game;
+    private String name;
 
-    public Player(Color color, Game game){
+    public Player(Color color, Game game, String name){
         this.color = color;
         this.game = game;
+        this.name = name;
     }
 
     public Vector<Piece> getPlayerPieces(){
@@ -32,5 +34,13 @@ public class Player {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

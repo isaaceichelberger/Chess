@@ -5,6 +5,7 @@ import Game.Board;
 import Pieces.Piece;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Chess {
 
@@ -15,6 +16,9 @@ public class Chess {
     private Piece selectedPiece;
     private JButton selectedPieceButton;
     private JButton selectedSpace;
+    private JButton turnButton;
+    private int buttonNum;
+    private ArrayList<JButton> buttons;
 
     public Chess(){
         this.gui = new BoardGUI();
@@ -24,6 +28,7 @@ public class Chess {
             instance = this;
         }
         gui.setGame(this.game);
+        this.buttonNum = 0;
     }
 
     public void gameLoop(){
@@ -80,5 +85,17 @@ public class Chess {
 
     public void setSelectedPieceButton(JButton selectedPieceButton) {
         this.selectedPieceButton = selectedPieceButton;
+    }
+
+    public JButton getTurnButton() {
+        return turnButton;
+    }
+
+    public void setTurnButton(JButton turnButton) {
+        this.turnButton = turnButton;
+    }
+
+    public void setButtons(ArrayList<JButton> buttons){
+        this.buttons = buttons;
     }
 }

@@ -46,6 +46,17 @@ public class BoardGUI {
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
+
+
+                JFrame frame2 = new JFrame("Turns and Captures");
+                frame2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                frame2.setLayout(new BorderLayout());
+                CapturedWindow capturedWindow = new CapturedWindow();
+                frame2.add(capturedWindow);
+                frame2.pack();
+                frame2.setLocation(frame.getX() + frame.getWidth(), frame.getY() / 2);
+                frame2.setVisible(true);
+                Chess.getInstance().setButtons(capturedWindow.getButtons());
             }
         });
     }

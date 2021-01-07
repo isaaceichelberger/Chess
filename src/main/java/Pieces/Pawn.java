@@ -6,6 +6,7 @@ import Game.Type;
 public class Pawn extends Piece {
 
     Type type;
+    private boolean pawnHasMoved;
 
     /**
      *
@@ -16,6 +17,7 @@ public class Pawn extends Piece {
     public Pawn(int x, int y, Player player){
         super(x, y, player);
         type = Type.PAWN;
+        this.pawnHasMoved = false;
     }
 
     /**
@@ -25,7 +27,8 @@ public class Pawn extends Piece {
      * @return
      */
     public boolean isValidPath(int finalX, int finalY) {
-        return false;
+        //for now for testing
+        return true;
     }
 
     /**
@@ -41,8 +44,7 @@ public class Pawn extends Piece {
     }
 
     protected boolean pawnCanMoveTwo(){
-
-        return false;
+        return !pawnHasMoved;
     }
 
     protected boolean pawnCanMoveForward(){
@@ -50,7 +52,19 @@ public class Pawn extends Piece {
         return false;
     }
 
+    protected boolean pawnCanCapture(){
+        return false;
+    }
+
     public Type getType() {
         return null;
+    }
+
+    public boolean isPawnHasMoved() {
+        return pawnHasMoved;
+    }
+
+    public void setPawnHasMoved(boolean pawnHasMoved) {
+        this.pawnHasMoved = pawnHasMoved;
     }
 }

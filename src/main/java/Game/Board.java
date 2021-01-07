@@ -82,7 +82,30 @@ public class Board {
 
     public void movePiece(Piece piece, int finalX, int finalY)
     {
-        // todo
+        if (piece.isValidPath(finalX, finalY)){
+            // move the piece
+            int x = piece.getX();
+            int y = piece.getY();
+            boardArray[finalX][finalY] = piece;
+            boardArray[x][y] = null;
+
+            // change the player
+            if (Chess.getInstance().getGame().getCurrentPlayer() == Chess.getInstance().getGame().getPlayer1()){
+                Chess.getInstance().getGame().setCurrentPlayer(Chess.getInstance().getGame().getPlayer2());
+            }
+            else {
+                Chess.getInstance().getGame().setCurrentPlayer(Chess.getInstance().getGame().getPlayer1());
+            }
+
+
+            // Specific Flags for pieces
+            // todo fix
+            if (piece instanceof Pawn){
+                if (!((Pawn) piece).isPawnHasMoved()){
+                    ((Pawn) piece).setPawnHasMoved(true);
+                }
+            }
+        }
     }
 
     public Piece[][] getBoardArray() {

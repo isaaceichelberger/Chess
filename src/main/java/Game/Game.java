@@ -39,8 +39,8 @@ public class Game {
     public void setPlayers()
     {
         // todo allow these to be changed
-        player1 = new Player(Color.WHITE, gameBoard.getGame());
-        player2 = new Player(Color.BLACK, gameBoard.getGame());
+        player1 = new Player(Color.WHITE, gameBoard.getGame(), "White");
+        player2 = new Player(Color.BLACK, gameBoard.getGame(), "Black");
         gameBoard.getGame().setPlayer1(player1);
         gameBoard.getGame().setPlayer2(player2);
 

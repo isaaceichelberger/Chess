@@ -98,4 +98,22 @@ public class Chess {
     public void setButtons(ArrayList<JButton> buttons){
         this.buttons = buttons;
     }
+
+    public int getButtonNum() {
+        return buttonNum;
+    }
+
+    public void setButtonNum(int buttonNum) {
+        this.buttonNum = buttonNum;
+    }
+
+    public ArrayList<JButton> getButtons() {
+        return buttons;
+    }
+
+    public JButton getSetCaptureButton(){
+        JButton button = buttons.get(buttonNum);
+        buttonNum += 1;
+        return button;
+    }
 }

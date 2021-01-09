@@ -99,13 +99,15 @@ public class Board {
 
 
             // Specific Flags for pieces
-            // todo fix
             if (piece instanceof Pawn){
                 if (!((Pawn) piece).isPawnHasMoved()){
                     ((Pawn) piece).setPawnHasMoved(true);
                 }
             }
         }
+        // Reset Flags if Invalid
+        Chess.getInstance().getGame().setCapture(false);
+        Chess.getInstance().getGame().setInvalid(false);
     }
 
     public Piece[][] getBoardArray() {

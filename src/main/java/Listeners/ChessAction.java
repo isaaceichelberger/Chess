@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import Game.Game;
 import Game.Board;
 import Game.Player;
@@ -15,6 +17,10 @@ import Game.Player;
 public class ChessAction implements ActionListener {
     public void actionPerformed(ActionEvent e){
         JButton button = (JButton) e.getSource();
+        Piece selectedPiece = Chess.getInstance().getSelectedPiece();
+        JButton selectedPieceButton = Chess.getInstance().getSelectedPieceButton();
+        JButton selectedSpace = Chess.getInstance().getSelectedSpace();
+        Game game = Chess.getInstance().getGame();
         Point rv = new Point();
         Piece[][] boardArray = Chess.getInstance().getGameBoard().getBoardArray();
         Piece selection = boardArray[button.getLocation(rv).x/100][button.getLocation(rv).y/100];
@@ -25,35 +31,66 @@ public class ChessAction implements ActionListener {
             else{
                 JOptionPane.showMessageDialog(null, "Select a piece first!");
             }
-        } else if (selection instanceof Pawn){ // todo add other pieces
-            if (selection.getPlayer() == Chess.getInstance().getGame().getCurrentPlayer()){
+            // if it's a piece
+        } else {
+            // If it is your own piece
+            if (selection.getPlayer() == game.getCurrentPlayer()){
                 Chess.getInstance().setSelectedPiece(selection);
                 Chess.getInstance().setSelectedPieceButton(button);
-            } else {
+                // if it is another player's piece and you haven't selected a piece yet
+            } else if (selectedPiece == null){
                 JOptionPane.showMessageDialog(null, "That is not your piece!");
+                // if it is another player's piece to capture
+            } else if (selection.getPlayer() != game.getCurrentPlayer() && selectedPiece != null){
+                Chess.getInstance().setSelectedSpace(button);
             }
         }
 
-        if (Chess.getInstance().getSelectedSpace() != null && Chess.getInstance().getSelectedPiece() != null) {
-            Chess.getInstance().getSelectedPiece().getPlayer().getGame().getGameBoard().movePiece(Chess.getInstance().getSelectedPiece(), button.getLocation(rv).x / 100, button.getLocation(rv).y / 100);
-            if (Chess.getInstance().getGame().isCapture()) {
-                //todo, add piece to captured window
-            } else if (Chess.getInstance().getGame().isInvalid()) {
-                //todo
+        // Refresh the button values
+        selectedPiece = Chess.getInstance().getSelectedPiece();
+        selectedPieceButton = Chess.getInstance().getSelectedPieceButton();
+        selectedSpace = Chess.getInstance().getSelectedSpace();
+
+        if (selectedSpace != null && selectedPiece != null) {
+            game.getGameBoard().movePiece(selectedPiece, button.getLocation(rv).x / 100, button.getLocation(rv).y / 100);
+            if (game.isCapture()) {
+                // Get the Current button to put the piece in
+                JButton captureButton = Chess.getInstance().getSetCaptureButton();
+                captureButton.setIcon(Chess.getInstance().getSelectedSpace().getIcon());
+
+                // Update space
+                Icon img = selectedPieceButton.getIcon();
+                selectedSpace.setIcon(img);
+                selectedPieceButton.setIcon(null);
+
+                // Reset gui
+                resetGUI();
+
+                /*
+                Todo: fix invalid not flagging
+                 */
+            } else if (game.isInvalid()) {
+                JOptionPane.showMessageDialog(null, "Invalid move!");
+                resetGUI();
             } else {
-                Icon img = Chess.getInstance().getSelectedPieceButton().getIcon();
-                Chess.getInstance().getSelectedSpace().setIcon(img);
-                Chess.getInstance().getSelectedPieceButton().setIcon(null);
+                Icon img = selectedPieceButton.getIcon();
+                selectedSpace.setIcon(img);
+                selectedPieceButton.setIcon(null);
+                resetGUI();
             }
 
-            Chess.getInstance().getGame().setCapture(false);
-            Chess.getInstance().setSelectedPieceButton(null);
-            Chess.getInstance().setSelectedPiece(null);
-            Chess.getInstance().setSelectedSpace(null);
-            Chess.getInstance().getGame().setInvalid(false);
-            Chess.getInstance().getGui().notifyInput();
-            // Change Who's turn it is message wise in the other GUI
-            Chess.getInstance().getTurnButton().setText(Chess.getInstance().getGame().getCurrentPlayer().getName() + "'s Turn");
         }
+    }
+
+    /**
+     * Resets the GUIs for the next turn
+     */
+    public void resetGUI(){
+        Chess.getInstance().setSelectedPieceButton(null);
+        Chess.getInstance().setSelectedPiece(null);
+        Chess.getInstance().setSelectedSpace(null);
+        Chess.getInstance().getGui().notifyInput();
+        // Change Who's turn it is message wise in the other GUI
+        Chess.getInstance().getTurnButton().setText(Chess.getInstance().getGame().getCurrentPlayer().getName() + "'s Turn");
     }
 }

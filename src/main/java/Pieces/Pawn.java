@@ -58,18 +58,6 @@ public class Pawn extends Piece {
         return false;
     }
 
-    /**
-     *
-     * @param startX   the initial X location
-     * @param startY   the initial Y location
-     * @param finalX the final X location
-     * @param finalY the final Y location
-     * @return
-     */
-    public int[][] drawPath(int startX, int startY, int finalX, int finalY) {
-
-        return new int[2][0];
-    }
 
     /**
      * A function determining whether a pawn can move forward two spaces.

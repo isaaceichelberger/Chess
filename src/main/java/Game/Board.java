@@ -45,8 +45,6 @@ public class Board {
             Piece pawn = new Pawn(i, 1, player2);
         }
 
-
-
         // TODO other pieces
     }
 

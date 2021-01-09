@@ -33,15 +33,6 @@ public abstract class Piece {
      */
     public abstract boolean isValidPath(int finalX, int finalY);
 
-    /**
-     * A function that draws a path from one point to another based on Piece type and stores the coordinates.
-     * @param startX   the initial X location
-     * @param startY   the initial Y location
-     * @param finalX the final X location
-     * @param finalY the final Y location
-     * @return an array of coordinates of the given path
-     */
-    public abstract int[][] drawPath(int startX, int startY, int finalX, int finalY);
 
     /**
      * A function that returns the type of a Piece.

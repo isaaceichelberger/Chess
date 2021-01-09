@@ -44,12 +44,10 @@ public class Pawn extends Piece {
             return true;
         }
 
-        System.out.println("before pawn can move foward");
 
 
         //checks if pawn is moving one space forward, does not let it move forward unless space is empty
         if (pawnCanMoveForward(finalX, finalY)) {
-            System.out.println("In pawn can move forward");
             game.setInvalid(false);
             return true;
         }
@@ -65,8 +63,7 @@ public class Pawn extends Piece {
      * @param finalY the final Y location
      * @return a boolean indicating whether a pawn can move forward two spaces
      */
-    protected boolean pawnCanMoveTwo(int finalX, int finalY)
-    {
+    private boolean pawnCanMoveTwo(int finalX, int finalY) {
         int x = this.getX();
         int y = this.getY();
         int abs_Y_diff = Math.abs(finalY - y);
@@ -92,7 +89,7 @@ public class Pawn extends Piece {
      * @param finalY
      * @return
      */
-    protected boolean pawnCanMoveForward(int finalX, int finalY)
+    private boolean pawnCanMoveForward(int finalX, int finalY)
     {
         int x = this.getX();
         int y = this.getY();
@@ -102,14 +99,6 @@ public class Pawn extends Piece {
         String name = game.getCurrentPlayer().getName();
         Piece[][] boardArray = Chess.getInstance().getGame().getGameBoard().getBoardArray();
 
-        System.out.println(finalY);
-        System.out.println(y);
-        System.out.println(Y_diff);
-        System.out.println(abs_Y_diff);
-        System.out.println(game.isInvalid());
-        System.out.println(boardArray[finalX][finalY]);
-        System.out.println(x);
-        System.out.println(finalX);
         if (((name.equalsIgnoreCase("White") && Y_diff < 0 && abs_Y_diff == 1 ) ||
                 (name.equalsIgnoreCase("Black") && Y_diff > 0 && abs_Y_diff == 1)) &&
                 boardArray[finalX][finalY] == null && x == finalX) {

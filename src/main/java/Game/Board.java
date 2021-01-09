@@ -45,6 +45,8 @@ public class Board {
             Piece pawn = new Pawn(i, 1, player2);
         }
 
+        Piece rook1 = new Rook(0, 0, player2);
+        Piece rook2 = new Rook(7, 0, player2);
         // TODO other pieces
     }
 
@@ -56,10 +58,12 @@ public class Board {
         Piece[][] board = this.boardArray;
         Player player1 = game.getPlayer1();
 
-        for(int i = 0; i < 8; i++)
-        {
+        for(int i = 0; i < 8; i++) {
             Piece pawn = new Pawn(i, 6, player1);
         }
+
+        Piece rook1 = new Rook(0, 7, player1);
+        Piece rook2 = new Rook(7, 7, player1);
 
         // TODO other pieces
     }

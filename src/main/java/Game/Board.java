@@ -80,14 +80,15 @@ public class Board {
         }
     }
 
-    public void movePiece(Piece piece, int finalX, int finalY)
-    {
+    public void movePiece(Piece piece, int finalX, int finalY) {
         if (piece.isValidPath(finalX, finalY)){
             // move the piece
             int x = piece.getX();
             int y = piece.getY();
             boardArray[finalX][finalY] = piece;
             boardArray[x][y] = null;
+            piece.setX(finalX);
+            piece.setY(finalY);
 
             // change the player
             if (Chess.getInstance().getGame().getCurrentPlayer() == Chess.getInstance().getGame().getPlayer1()){
@@ -105,9 +106,6 @@ public class Board {
                 }
             }
         }
-        // Reset Flags if Invalid
-        Chess.getInstance().getGame().setCapture(false);
-        Chess.getInstance().getGame().setInvalid(false);
     }
 
     public Piece[][] getBoardArray() {

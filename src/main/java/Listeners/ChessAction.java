@@ -41,7 +41,7 @@ public class ChessAction implements ActionListener {
             } else if (selectedPiece == null){
                 JOptionPane.showMessageDialog(null, "That is not your piece!");
                 // if it is another player's piece to capture
-            } else if (selection.getPlayer() != game.getCurrentPlayer() && selectedPiece != null){
+            } else if (selection.getPlayer() != game.getCurrentPlayer()){
                 Chess.getInstance().setSelectedSpace(button);
             }
         }
@@ -52,23 +52,18 @@ public class ChessAction implements ActionListener {
         selectedSpace = Chess.getInstance().getSelectedSpace();
 
         if (selectedSpace != null && selectedPiece != null) {
+            // if path is invalid, does nothing
             game.getGameBoard().movePiece(selectedPiece, button.getLocation(rv).x / 100, button.getLocation(rv).y / 100);
             if (game.isCapture()) {
                 // Get the Current button to put the piece in
                 JButton captureButton = Chess.getInstance().getSetCaptureButton();
                 captureButton.setIcon(Chess.getInstance().getSelectedSpace().getIcon());
-
                 // Update space
                 Icon img = selectedPieceButton.getIcon();
                 selectedSpace.setIcon(img);
                 selectedPieceButton.setIcon(null);
-
                 // Reset gui
                 resetGUI();
-
-                /*
-                Todo: fix invalid not flagging
-                 */
             } else if (game.isInvalid()) {
                 JOptionPane.showMessageDialog(null, "Invalid move!");
                 resetGUI();
@@ -78,7 +73,6 @@ public class ChessAction implements ActionListener {
                 selectedPieceButton.setIcon(null);
                 resetGUI();
             }
-
         }
     }
 
@@ -90,6 +84,8 @@ public class ChessAction implements ActionListener {
         Chess.getInstance().setSelectedPiece(null);
         Chess.getInstance().setSelectedSpace(null);
         Chess.getInstance().getGui().notifyInput();
+        Chess.getInstance().getGame().setInvalid(false);
+        Chess.getInstance().getGame().setCapture(false);
         // Change Who's turn it is message wise in the other GUI
         Chess.getInstance().getTurnButton().setText(Chess.getInstance().getGame().getCurrentPlayer().getName() + "'s Turn");
     }

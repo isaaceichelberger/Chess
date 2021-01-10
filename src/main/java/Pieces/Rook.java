@@ -20,13 +20,11 @@ public class Rook extends Piece {
     public boolean isValidPath(int finalX, int finalY) {
         Game game = Chess.getInstance().getGame();
         if (rookCanCapture(finalX, finalY)){
-            System.out.println("In capture block");
             game.setCapture(true);
             game.setInvalid(false);
             return true;
         }
         if (rookCanMove(finalX, finalY)){
-            System.out.println("In move block");
             game.setInvalid(false);
             return true;
         }

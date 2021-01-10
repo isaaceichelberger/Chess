@@ -48,6 +48,8 @@ public class Board {
         Piece rook1 = new Rook(0, 0, player2);
         Piece rook2 = new Rook(7, 0, player2);
         // TODO other pieces
+        Piece knight1 = new Knight(1, 0, player2);
+        Piece knight2 = new Knight(6, 0, player2);
     }
 
     /**
@@ -64,6 +66,9 @@ public class Board {
 
         Piece rook1 = new Rook(0, 7, player1);
         Piece rook2 = new Rook(7, 7, player1);
+
+        Piece knight1 = new Knight(1, 7, player1);
+        Piece knight2 = new Knight(6, 7, player1);
 
         // TODO other pieces
     }

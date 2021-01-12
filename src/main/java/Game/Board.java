@@ -50,6 +50,9 @@ public class Board {
         // TODO other pieces
         Piece knight1 = new Knight(1, 0, player2);
         Piece knight2 = new Knight(6, 0, player2);
+
+        Piece bishop1 = new Bishop(2, 0, player2);
+        Piece bishop2 = new Bishop(5, 0, player2);
     }
 
     /**
@@ -69,6 +72,9 @@ public class Board {
 
         Piece knight1 = new Knight(1, 7, player1);
         Piece knight2 = new Knight(6, 7, player1);
+
+        Piece bishop1 = new Bishop(2, 7, player1);
+        Piece bishop2 = new Bishop(5, 7, player1);
 
         // TODO other pieces
     }
